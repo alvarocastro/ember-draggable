@@ -1,0 +1,28 @@
+<article>
+  <h2 class="mt-5 mb-3">Drag handle</h2>
+
+  <p>
+    You can specify the dragging handle element using the <code>\{{sortable-item-handle}}</code>. This will override the default behaviour of making the whole item draggable.
+  </p>
+
+  <div class="row mb-3">
+    <div class="col-md-8">
+      <Code @code={{this.jsCode}} @lang="js" />
+      <Code @code={{this.hbsCode}} @lang="hbs" />
+      {{!-- <Code @code={{this.dumpCode}} @lang="js" /> --}}
+    </div>
+    <div class="col-md-4">
+      <ul class="list-group mb-3">
+        {{#each this.items as |item|}}
+          <li
+            {{sortable-item data=item onDrop=this.move}}
+            class="list-group-item"
+          >
+            <i class="fa-solid fa-grip-lines me-2" {{draggable-item-handle}}></i>
+            {{item}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</article>

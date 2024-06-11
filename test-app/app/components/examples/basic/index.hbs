@@ -1,0 +1,76 @@
+<article>
+  <h2 class="mt-5 mb-3">Usage</h2>
+
+  <div class="row mb-3">
+    <div class="col-md-8">
+      <Ui::Code @code={{this.hbsCode}} @lang="hbs" />
+      <Ui::Code @code={{this.jsCode}} @lang="js" />
+    </div>
+    <div class="col-md-4">
+      <ul class="list-group mb-3">
+        {{#each this.items as |item|}}
+          <li
+            {{sortable-item data=item onDrop=this.move}}
+            class="list-group-item"
+          >
+            {{item}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+
+  <Ui::Alert @type="info">
+    <Ui::Icon @name="lightbulb" @class="me-2" /><code>insertBefore()</code>, <code>insertAfter()</code> and <code>removeItem()</code> functions come from an array utils library bundled in the addon to ease the manipulation of arrays.
+  </Ui::Alert>
+
+  <h2 class="mt-5 mb-3">API</h2>
+
+  <h3 class="mt-4 mb-3">Modifiers</h3>
+
+  <h4><code>\{{draggable-item}}</code></h4>
+
+  <div class="container">
+    <div class="row border-bottom py-2">
+      <div class="col-2">
+        <code>data</code>
+      </div>
+      <div class="col-10">
+        Data to associate with the draggable item.
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <code>data</code>
+      </div>
+      <div class="col-10">
+        Data to associate with the draggable item.
+      </div>
+    </div>
+  </div>
+
+  <table class="table">
+    <tbody>
+      <tr>
+        <th scope="row">data</th>
+        <td>Data to associate with the draggable item.</td>
+      </tr>
+      <tr>
+        <th scope="row">group</th>
+        <td>A group name to easily .</td>
+      </tr>
+      <tr>
+        <th scope="row">isDraggingClass</th>
+        <td>Lorem ipsum dolor sit amet.</td>
+      </tr>
+      <tr>
+        <th scope="row">onDragStart</th>
+        <td>Lorem ipsum dolor sit amet.</td>
+      </tr>
+      <tr>
+        <th scope="row">onDragEnd</th>
+        <td>Lorem ipsum dolor sit amet.</td>
+      </tr>
+    </tbody>
+  </table>
+</article>

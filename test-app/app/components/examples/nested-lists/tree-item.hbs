@@ -1,0 +1,17 @@
+<li
+  {{sortable-item data=(hash item=@item parent=@parent) onDrop=@onDrop}}
+  class="list-group-item"
+>
+  {{@item.name}}
+  {{#if @item.childs}}
+  <ul class="list-group mb-3">
+    {{#each @item.childs as |child|}}
+      <Examples::NestedLists::TreeItem
+        @item={{child}}
+        @parent={{@item}}
+        @onDrop={{@onDrop}}
+      />
+    {{/each}}
+  </ul>
+  {{/if}}
+</li>

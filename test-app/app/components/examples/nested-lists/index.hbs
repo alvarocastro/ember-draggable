@@ -1,0 +1,29 @@
+<article>
+  <h2 class="mt-5 mb-3">Shared lists</h2>
+
+  <p>
+    <code>\{{sortable-group}}</code>s won't accept elements from other groups unless they share the same <code>group</code>.
+  </p>
+
+  <p>
+    <code>name</code> is a custom feature provided by this library.
+  </p>
+
+  <div class="row mb-3">
+    <div class="col-md-8">
+      <Code @code={{this.jsCode}} @lang="js" />
+      <Code @code={{this.hbsCode}} @lang="hbs" />
+    </div>
+    <div class="col-md-4">
+      <ul class="list-group mb-3">
+        {{#each this.root.childs as |item|}}
+          <Examples::NestedLists::TreeItem
+            @item={{item}}
+            @parent={{this.root}}
+            @onDrop={{this.move}}
+          />
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</article>

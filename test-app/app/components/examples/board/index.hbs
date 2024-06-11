@@ -1,0 +1,47 @@
+<div class="hstack gap-3 align-items-start overflow-scroll">
+  {{#each this.columns as |column|}}
+    <div
+      class="card flex-grow-0 bg-body-tertiary"
+      style="width: 320px;"
+      {{sortable-item
+        data=column
+        group="columns"
+        direction="horizontal"
+        onDrop=this.moveColumn
+      }}
+    >
+      <div class="card-header fw-bold text-uppercase">
+        {{column.name}}
+      </div>
+      <div class="card-body p-2 vstack gap-2 ">
+        {{#each column.cards as |card|}}
+          <div
+            class="card p-2 d-flex flex-row align-items-center bg-body-secondary"
+            {{sortable-item
+              group="cards"
+              data=(hash item=card parent=column)
+              onDrop=this.moveCard
+            }}
+          >
+            <img src="https://api.dicebear.com/8.x/bottts-neutral/svg?seed={{card.seed}}" width="48" height="48" class="rounded" />
+            <div class="ms-3 flex-grow-1">
+              <h5 class="card-title">{{card.title}}</h5>
+              <p class="card-text">{{card.text}}</p>
+            </div>
+          </div>
+        {{else}}
+          <div
+            class="text-center my-4 text-secondary"
+            {{drop-target
+              group="cards"
+              data=(hash parent=column)
+              onDrop=this.moveCard
+            }}
+          >
+            Empty
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  {{/each}}
+</div>

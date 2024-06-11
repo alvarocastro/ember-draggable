@@ -1,0 +1,49 @@
+<style type="text/css">
+  .desktop {
+    position: relative;
+    background: #008080;
+    width: 600px;
+    height: 400px;
+    overflow: hidden;
+  }
+  .desktop-icon {
+    position: absolute;
+    width: 96px;
+  }
+  .desktop-icon img {
+    pointer-events: none;
+    margin: 0 auto 4px;
+    width: 48px;
+    height: 48px;
+    display: block;
+  }
+  .desktop-icon span {
+    display: block;
+    font-size: 14px;
+    text-align: center;
+  }
+</style>
+
+<div class="desktop"
+  {{drop-target onDrop=this.move}}
+>
+  {{#each this.icons as |icon|}}
+    <div
+      class="desktop-icon"
+      style="{{icon.position}}"
+      {{draggable-item data=icon}}
+    >
+      <img src="{{icon.image}}" />
+      <span>{{icon.name}}</span>
+    </div>
+  {{/each}}
+  <div
+    class="desktop-icon"
+    style="{{this.trash.position}}"
+    {{draggable-item data=this.trash}}
+    {{drop-target onDrop=this.delete data=this.trash}}
+  >
+    <img src="{{this.trash.image}}" />
+    <span>{{this.trash.name}}</span>
+  </div>
+</div>
