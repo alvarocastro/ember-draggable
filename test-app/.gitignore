@@ -1,6 +1,6 @@
 # compiled output
 # docs site
-# /dist/
+/dist/
 /declarations/
 
 # dependencies
