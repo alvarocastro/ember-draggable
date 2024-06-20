@@ -56,8 +56,8 @@ export const getNestedDepth = function (event) {
 };
 
 /**
- * Modifier to define a drop target.
- * @param {DOMElement} element Target DOM element.
+ * Modifier to define a drop target for draggable items.
+ * @param {HTMLElement} element Target DOM element.
  * @param {any} options.data Data to associate with the drop target.
  * @param {String} options.group This drop target belongs to.
  * @param {Array} [options.accepts] Array of types this target accepts.
@@ -65,7 +65,9 @@ export const getNestedDepth = function (event) {
  * @param {Array} [options.allowedEdges] Array of allowed edges to detect on drop. Options: "top", "bottom", "left", "right".
  * @param {Boolean} [options.allowDropOnItself=false] Allow an element to drop on itself if it's both a draggable item and drop target.
  * @param {Boolean} [options.allowDropOnChildren=false] Allow the target to receive drops from a parent draggable (this option is valid for nested targets)
- * @param {Boolean} [disabled] Prevents the element to receive drops.
+ * @param {Boolean} [disabled] Prevents the element to both be dragged and receive drops.
+ * @param {Boolean} [disabledDrag] Prevents the element to be dragged.
+ * @param {Boolean} [disabledDrop] Prevents the element to receive drops.
  * @param {String} [options.isOnTargetClass] Class added to the element when an item is dragged over.
  * @param {Function} [options.canDrop] Callback used to conditionally allow drops.
  * @param {Function} [options.onDrop] Callback fired when an item is dropped.
@@ -82,6 +84,8 @@ export default modifier(function dropTarget (element, positional, {
   allowDropOnItself = false,
   allowDropOnChildren = false,
   disabled = false,
+  disabledDrag = false,
+  disabledDrop = false,
   isOnTargetClass = CLASS.DROP_TARGET_ITEM,
   canDrop = (payload, canDrop) => canDrop,
   onDrop = () => {},

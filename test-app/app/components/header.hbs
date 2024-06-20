@@ -1,10 +1,191 @@
-<div class="p-5 mb-4 bg-body-tertiary">
+<style type="text/css">
+.fart1 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 200px;
+
+  --c1: var(--c);
+  --c2: hsl(from var(--c) h s calc(l + var(--v)));
+
+  --_g: #0000 8%,var(--c1) 0 17%,#0000 0 58%;
+  background:
+    linear-gradient(135deg,#0000 20.5%,var(--c1) 0 29.5%,#0000 0) 0 calc(var(--s)/4),
+    linear-gradient( 45deg,var(--_g)) calc(var(--s)/2) 0,
+    linear-gradient(135deg,var(--_g),var(--c1) 0 67%,#0000 0),
+    linear-gradient( 45deg,var(--_g),var(--c1) 0 67%,#0000 0 83%,var(--c1) 0 92%,#0000 0),
+    var(--c2);
+  background-size: var(--s) var(--s);
+}
+
+.fart2 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 60px;
+
+  --c1: hsl(from var(--c) h s calc(l + var(--v)));
+  --c2: hsl(from var(--c) h s calc(l - var(--v)));
+  --c3: var(--c);
+
+  background:
+    var(--s) var(--s)/calc(var(--s) * 2) calc(var(--s) * 2) linear-gradient(135deg, var(--c1) 10%, var(--c2) 0 25%, transparent 0 75%, var(--c2) 0 90%, var(--c1) 90%),
+    0 0/calc(var(--s) * 2) calc(var(--s) * 2) linear-gradient(135deg, var(--c1) 10%, var(--c3) 0 25%, transparent 0 75%, var(--c3) 0 90%, var(--c1) 90%),
+    0 0/calc(var(--s) * 2) calc(var(--s) * 2) linear-gradient(45deg, var(--c1) 10%, var(--c2) 0 25%, var(--c3) 0 40%, var(--c1) 0 60%, var(--c3) 0 75%, var(--c2) 0 90%, var(--c1) 90%);
+}
+
+.fart3 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 50px;
+
+  --c1: hsl(from var(--c) h s calc(l + var(--v)));
+  --c2: var(--c);
+  background:
+    radial-gradient(circle at 100% 50%, transparent 20%, var(--c1) 21%, var(--c1) 34%, transparent 35%, transparent),
+    radial-gradient(circle at 0% 50%, transparent 20%, var(--c1) 21%, var(--c1) 34%, transparent 35%, transparent) 0 calc(var(--s) * -1);
+  background-color: var(--c2);
+  background-size: calc(var(--s) * 1.5) calc(var(--s) * 2);
+}
+
+.fart4 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 150px;
+
+  --c1: var(--c);
+  --c2: hsl(from var(--c) h s calc(l + var(--v)));
+  --c3: hsl(from var(--c) h s calc(l + var(--v) * 2));
+  --c4: hsl(from var(--c) h s calc(l + var(--v) * 3));
+  --gp: 50%/var(--s) var(--s);
+  background-color: var(--c1);
+  background:
+    repeating-conic-gradient(from 90deg at 75% 75% , var(--c4) 0% 25%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from 180deg at 50% 75% , var(--c1) 0% 12.5%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from 135deg at 62.5% 62.5% , var(--c4) 0% 25%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from 134.5deg at 25% 75% , var(--c1) 0% 12.65%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from 135deg at 12.5% 62.5% , var(--c4) 0% 25%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from 225deg at 12.5% 62.5% , var(--c3) 0% 25%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from 225deg at 25% 50% , var(--c2) 0% 12.5%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from 90deg at 75% 75% , var(--c1) 0% 25%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from 135deg at 50% 50% , var(--c1) 0% 37.5%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from 225deg at 75% 50% , var(--c2) 0% 12.5%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from 45deg at 62.5% 62.5% , var(--c3) 0% 25%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from 90deg at 75% 25% , var(--c3) 0% 25%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from 45deg at 62.5% 12.5%, var(--c3) 0% 25%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from -45deg at 62.5% 12.5%, var(--c4) 0% 25%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from 45deg at 50% 25%, var(--c2) 0% 12.5%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from -45deg at 12.5% 12.5%, var(--c4) 0% 25%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from 0deg at 0% 25%, var(--c3) 0% 12.50%, #fff0 0% 100%) var(--gp),
+    repeating-conic-gradient(from -90deg at 25% 25%, var(--c2) 0% 12.50%, #fff0 0% 100%) var(--gp),
+    repeating-linear-gradient(180deg, var(--c1) 0 25%, var(--c2) 0 50%, var(--c1) 0 100% ) var(--gp);
+}
+
+.fart5 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 100px; /* diameter */
+  --t: 4px; /* thickness */
+  --o: 10px; /* offset */
+
+  --c1: hsl(from var(--c) h s calc(l + var(--v)));
+  --c2: var(--c);
+  background-color: var(--c2);
+  background-size: calc(var(--s) * 2 + var(--t) * 2) calc(var(--s) * 2 + var(--t) * 2);
+  background-image:
+    radial-gradient(transparent var(--s), var(--c1) var(--s), var(--c1) calc(var(--s) + var(--t)), transparent calc(var(--s) + var(--t))),
+    radial-gradient(transparent var(--s), var(--c1) var(--s), var(--c1) calc(var(--s) + var(--t)), transparent calc(var(--s) + var(--t)));
+  background-position: var(--o) var(--o), calc(var(--s) + var(--t) + var(--o)) calc(var(--s) + var(--t) + var(--o));
+}
+
+.fart6 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 200px; /* size */
+
+  --c1: hsl(from var(--c) h s calc(l + var(--v)));
+  --c2: var(--c);
+  background:
+    linear-gradient(135deg,#0000 18.75%,var(--c2) 0 31.25%,#0000 0),
+    repeating-linear-gradient(45deg,var(--c2) -6.25% 6.25%,var(--c1) 0 18.75%);
+  background-size: var(--s) var(--s);
+}
+
+.fart7 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 50px; /* size */
+
+  --c1: hsl(from var(--c) h s calc(l + var(--v)));
+  --c2: var(--c);
+  background:
+    linear-gradient(135deg, var(--c1) 25%, transparent 25%) calc(var(--s) * -1.5) 0,
+    linear-gradient(225deg, var(--c1) 25%, transparent 25%) calc(var(--s) * -1.5) 0,
+    linear-gradient(315deg, var(--c1) 25%, transparent 25%),
+    linear-gradient(45deg, var(--c1) 25%, transparent 25%);
+  background-size: var(--s) var(--s);
+  background-color: var(--c2);
+}
+
+.fart8 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 90px;
+
+  --c1: hsl(from var(--c) h s calc(l + var(--v)));
+  --c2: hsl(from var(--c) h s calc(l - var(--v)));
+  --c3: var(--c);
+  --s1: calc(var(--s) * .5);
+  --s2: calc(var(--s) * .6);
+  background:
+    radial-gradient(circle, var(--c1) calc(var(--s1) / 2), #0000 calc(var(--s1) / 2), #0000 var(--s1), var(--c2) var(--s1), var(--c2) var(--s2), #0000 var(--s2)) 0 0,
+    radial-gradient(circle, var(--c2) calc(var(--s1) / 2), #0000 calc(var(--s1) / 2), #0000 var(--s1), var(--c1) var(--s1), var(--c1) var(--s2), #0000 var(--s2)) var(--s) var(--s),
+    radial-gradient(circle, var(--c1) calc(var(--s1) / 4), #0000 calc(var(--s1) / 4)) var(--s) 0,
+    radial-gradient(circle, var(--c2) calc(var(--s1) / 5), #0000 calc(var(--s1) / 5)) 0 var(--s);
+  background-size: calc(var(--s) * 2) calc(var(--s) * 2);
+  background-color: var(--c3);
+  background-repeat: repeat;
+}
+
+.fart9 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 110px;
+
+  --c1: hsl(from var(--c) h s calc(l + var(--v)));
+  --c2: var(--c);
+  background: linear-gradient(-45deg, #0000 50%, var(--c1) 50%, var(--c1) 60%, #0000 60%);
+  background-size: var(--s) var(--s);
+  background-color: var(--c2);
+}
+
+.fart10 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 100px;
+
+  --c1: hsl(from var(--c) h s calc(l + var(--v) * 6));
+  --c2: hsl(from var(--c) h s calc(l + var(--v) * 2));
+  --c3: var(--c);
+
+  --s1: var(--s);
+  --s2: calc(var(--s) / 5);
+  background-color: var(--c3);
+  background-image:
+    linear-gradient(var(--c1) 2px, transparent 2px),
+    linear-gradient(90deg, var(--c1) 2px, transparent 2px),
+    linear-gradient(var(--c2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--c2) 1px, transparent 1px);
+  background-size: var(--s1) var(--s1), var(--s1) var(--s1), var(--s2) var(--s2), var(--s2) var(--s2);
+  background-position: -10px -2px, -2px -2px, -1px -1px, -1px -1px;
+}
+</style>
+
+<div class="p-5 abg-body-tertiary fart1">
   <div class="container py-5">
     <h1 class="display-2">
       Ember draggable
     </h1>
     <p class="lead">
-      Basic set of modifiers to create smooth drag and drop interfaces powered by the <a target="_blank" href="https://atlassian.design/components/pragmatic-drag-and-drop/about">Atlassian Design System</a>
+      Basic set of modifiers to create smooth drag and drop interfaces powered by the <a target="_blank" rel="noopener noreferrer"href="https://atlassian.design/components/pragmatic-drag-and-drop/about">Atlassian Design System</a>
     </p>
   </div>
 </div>

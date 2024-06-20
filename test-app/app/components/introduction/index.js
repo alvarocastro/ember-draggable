@@ -3,19 +3,13 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { insertBefore, insertAfter, removeItem } from 'ember-draggable/utils/array';
 
-export default class ExamplesBasicComponent extends Component {
+export default class IntroductionComponent extends Component {
   @tracked items = [ 'One', 'Two', 'Three', 'Four', 'Five' ];
-
-  get dumpCode () {
-    return `
-      this.items = [ ${this.items.map(item => JSON.stringify(item)).join(', ')} ];
-    `;
-  }
 
   hbsCode = `
     <ul>
       {{#each this.items as |item|}}
-        <li {{sortable-item data=item onDrop=this.move}} class="list-group-item">
+        <li {{sortable-item data=item onDrop=this.move}}>
           {{item}}
         </li>
       {{/each}}

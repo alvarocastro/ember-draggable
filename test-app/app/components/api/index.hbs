@@ -1,0 +1,166 @@
+<Ui::Section @title="API">
+  <Ui::Subsection @title="Modifiers">
+    <Ui::Function
+      @title="\{{draggable-item}}"
+      @description="Modifier to make a DOM element draggable."
+      @params={{array
+        (hash
+          name="data"
+          type="any"
+          description="Data to associate with the item."
+        )
+        (hash
+          name="group"
+          type="string"
+          description="Name of the group this item belongs to."
+        )
+        (hash
+          name="dragHandleElement"
+          type="HTMLElement"
+          description="Element that acts as the drag handle."
+        )
+        (hash
+          name="disabled"
+          type="boolean"
+          description="Prevents the element to be dragged."
+        )
+        (hash
+          name="isDraggingClass"
+          type="string"
+          description="Class added to the element when it is being drag."
+        )
+        (hash
+          name="onDragStart"
+          type="function"
+          description="Callback fired when the drag starts."
+        )
+        (hash
+          name="onDragEnd"
+          type="function"
+          description="Callback fired when the item is dropped."
+        )
+      }}
+    />
+
+    <Ui::Function
+      @title="\{{drop-target}}"
+      @description="Modifier to define a drop target for draggable items."
+      @params={{array
+        (hash
+          name="data"
+          type="any"
+          description="Data to associate with the drop target."
+        )
+        (hash
+          name="group"
+          type="string"
+          description="Name of the group this drop target belongs to."
+        )
+        (hash
+          name="accepts"
+          type="string[]"
+          description="Array of groups this target accepts from."
+        )
+        (hash
+          name="direction"
+          type="\"vertical\" | \"horizontal\""
+          default="\"vertical\""
+          description="Shortcut to define presets of allowed edges."
+        )
+        (hash
+          name="allowedEdges"
+          type="(\"top\" | \"bottom\" | \"left\" | \"right\")[]"
+          description="Array of allowed edges to detect on drop."
+        )
+        (hash
+          name="allowDropOnItself"
+          type="boolean"
+          default="false"
+          description="Allow an element to drop on itself if it's both a draggable item and a drop target."
+        )
+        (hash
+          name="allowDropOnChildren"
+          type="boolean"
+          default="false"
+          description="Allow the target to receive drops from a parent draggable (this option is valid for nested targets)"
+        )
+        (hash
+          name="disabled"
+          type="boolean"
+          description="Prevents the element to receive drops."
+        )
+        (hash
+          name="isOnTargetClass"
+          type="string"
+          description="Class added to the element when an item is dragged over."
+        )
+        (hash
+          name="canDrop"
+          type="function"
+          description="Callback used to conditionally allow drops."
+        )
+        (hash
+          name="onDrop"
+          type="function"
+          description="Callback fired when an item is dropped."
+        )
+        (hash
+          name="onHover"
+          type="function"
+          description="Callback fired when an item is dragged over."
+        )
+        (hash
+          name="onDragEnter"
+          type="function"
+          description="Callback fired when a dragged item enters this target."
+        )
+        (hash
+          name="onDragLeave"
+          type="function"
+          description="Callback fired when a dragged item leaves this target."
+        )
+      }}
+    />
+  </Ui::Subsection>
+
+  <Ui::Subsection @title="Utilities">
+    <p>
+      All of the utilities listed here are optional convenience functions. You can also substitute them for your own similiar utilities if you want to.
+    </p>
+
+    <Ui::Code @lang="js">
+      import { insertAt } from 'ember-sortable/utils/array';
+
+      const arr = [ 'one', 'two', 'three' ];
+      insertAt(arr, 1, 'new!'); // => [ 'one', 'new!', 'two', 'three' ]
+    </Ui::Code>
+
+    <Ui::Code @lang="js">
+      import { removeAt } from 'ember-sortable/utils/array';
+
+      const arr = [ 'one', 'two', 'three' ];
+      removeAt(arr, 1); // => [ 'one', 'three' ]
+    </Ui::Code>
+
+    <Ui::Code @lang="js">
+      import { insertBefore } from 'ember-sortable/utils/array';
+
+      const arr = [ 'one', 'two', 'three' ];
+      insertBefore(arr, 'two', 'new!'); // => [ 'one', 'new!', 'two', 'three' ]
+    </Ui::Code>
+
+    <Ui::Code @lang="js">
+      import { insertAfter } from 'ember-sortable/utils/array';
+
+      const arr = [ 'one', 'two', 'three' ];
+      insertAfter(arr, 'two', 'new!'); // => [ 'one', 'two', 'new!', 'three' ]
+    </Ui::Code>
+
+    <Ui::Code @lang="js">
+      import { removeItem } from 'ember-sortable/utils/array';
+
+      const arr = [ 'one', 'two', 'three' ];
+      removeItem(arr, 'two'); // => [ 'one', 'three' ]
+    </Ui::Code>
+  </Ui::Subsection>
+</Ui::Section>

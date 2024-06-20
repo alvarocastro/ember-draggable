@@ -1,35 +1,5 @@
 {{page-title "TestApp"}}
 
-{{!--
-
-
-<div class="container mx-auto">
-    <div class="flex flex-row flex-wrap py-4">
-        <aside class="w-full sm:w-1/3 md:w-1/4 px-2">
-            <div class="sticky top-0 p-4 w-full">
-                <ul class="flex flex-col overflow-hidden">
-                    ...
-                </ul>
-            </div>
-        </aside>
-        <main role="main" class="w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
-            <!-- content area -->
-        </main>
-    </div>
-</div>
-<footer class="mt-auto">
-    ...
-</footer>
-
---}}
-
-<style type="text/css">
-  /*
-  main > .container {
-    padding-top: 60px;
-  }
-  */
-</style>
 <style type="text/css">
   [data-sortable-item="handle"], [data-sortable-item-handle] {
     cursor: grab;
@@ -94,15 +64,60 @@ reparent
   <Header />
 
   <div class="container">
-    <Examples::Basic />
+    <div class="row">
+      <div class="col-2">
+
+        <div class="sticky-top pt-4">
+          <nav class="vh-100 flex-column align-items-stretch pe-4 border-end">
+            <Ui::Nav @items={{array
+              (hash href="#introduction" text="Introduction"
+                items=(array
+                  (hash href="#installation" text="Installation")
+                  (hash href="#usage" text="Usage")
+                )
+              )
+              (hash href="#examples" text="Examples"
+                items=(array
+                  (hash href="#drag-handle" text="Drag handle")
+                  (hash href="#shared-lists" text="Shared lists")
+                  (hash href="#nested-lists" text="Nested lists")
+                  (hash href="#board" text="Board")
+                  (hash href="#windows-98" text="Windows 98")
+                )
+              )
+              (hash href="#api" text="API"
+                items=(array
+                  (hash href="#modifiers" text="Modifiers")
+                  (hash href="#utilities" text="Utilities")
+                )
+              )
+            }} />
+                  {{!-- (hash href="#service" text="Service") --}}
+          </nav>
+        </div>
+
+      </div>
+
+      <div class="col-10 mt-4">
+
+        <Introduction />
+        <Examples />
+        <Api />
+
+      </div>
+    </div>
+  </div>
+
     {{!--
+  <div class="container">
+        <Examples::Basic />
     <Examples::Handle />
     <Examples::SharedLists />
     <Examples::NestedLists />
     <Examples::WindowsDesktop />
     <Examples::Board />
-    --}}
   </div>
+    --}}
 </main>
 
 

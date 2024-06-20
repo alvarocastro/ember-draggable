@@ -1,41 +1,39 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { insertAt, removeFrom } from 'ember-draggable/utils/array';
+import { insertBefore, insertAfter, removeItem } from 'ember-draggable/utils/array';
 
 export default class ExamplesSharedListsComponent extends Component {
   @tracked itemsTop = [ 'One', 'Two', 'Three', 'Four', 'Five' ];
   @tracked itemsBottom = [ 'Six', 'Seven', 'Eight', 'Nine', 'Ten' ];
 
-  get dumpCode () {
-    return `
-      this.itemsTop = ${JSON.stringify(this.itemsTop)};
-      this.itemsBottom = ${JSON.stringify(this.itemsBottom)};
-    `;
-  }
-
   hbsCode = `
-    <ul {{sortable-group
-      name="itemsTop"
-      group="shared"
-      onSort=this.sortItems
-      onAdd=this.addItem
-      onRemove=this.removeItem
-    }}>
+    <ul>
       {{#each this.itemsTop as |item|}}
-        <li {{sortable-item}} class="list-group-item">{{item}}</li>
+        <li
+          {{sortable-item
+            data=item
+            group="itemsTop"
+            accepts=(array "itemsTop" "itemsBottom")
+            onDrop=this.move
+          }}
+        >
+          {{item}}
+        </li>
       {{/each}}
     </ul>
-
-    <ul {{sortable-group
-      name="itemsBottom"
-      group="shared"
-      onSort=this.sortItems
-      onAdd=this.addItem
-      onRemove=this.removeItem
-    }}>
+    <ul>
       {{#each this.itemsBottom as |item|}}
-        <li {{sortable-item}} class="list-group-item">{{item}}</li>
+        <li
+          {{sortable-item
+            data=item
+            group="itemsBottom"
+            accepts="itemsTop"
+            onDrop=this.move
+          }}
+        >
+          {{item}}
+        </li>
       {{/each}}
     </ul>
   `;
@@ -45,36 +43,31 @@ export default class ExamplesSharedListsComponent extends Component {
       @tracked itemsTop = [ ${this.itemsTop.map(item => JSON.stringify(item)).join(', ')} ];
       @tracked itemsBottom = [ ${this.itemsBottom.map(item => JSON.stringify(item)).join(', ')} ];
 
-      @action sortItems ({ fromList, oldIndex, newIndex }) {
-        this[fromList] = move(this[fromList], oldIndex, newIndex);
-      }
+      @action move ({ source, target }) {
+        const { data: draggedItem, group: fromList } = source;
+        const { data: dropTarget, group: toList, edge } = target;
 
-      @action removeItem ({ fromList, toList, oldIndex }) {
-        this[fromList] = removeFrom(this[fromList], oldIndex);
-      }
+        this[fromList] = removeItem(this[fromList], draggedItem);
 
-      @action addItem ({ fromList, toList, oldIndex, newIndex }) {
-        this[toList] = insertAt(this[toList], newIndex, this[fromList][oldIndex]);
+        if (edge === 'top') {
+          this[toList] = insertBefore(this[toList], dropTarget, draggedItem);
+        } else {
+          this[toList] = insertAfter(this[toList], dropTarget, draggedItem);
+        }
       }
     `;
   }
 
+  @action move ({ source, target }) {
+    const { data: draggedItem, group: fromList } = source;
+    const { data: dropTarget, group: toList, edge } = target;
 
-  @action move ({
-    source: {
-      data: draggedItem,
-      group: fromList
-    },
-    target: {
-      data: dropTarget,
-      group: toList,
-      edge
+    this[fromList] = removeItem(this[fromList], draggedItem);
+
+    if (edge === 'top') {
+      this[toList] = insertBefore(this[toList], dropTarget, draggedItem);
+    } else {
+      this[toList] = insertAfter(this[toList], dropTarget, draggedItem);
     }
-  }) {
-    const oldIndex = this[fromList].indexOf(draggedItem);
-    this[fromList] = removeFrom(this[fromList], oldIndex);
-
-    const newIndex = this[toList].indexOf(dropTarget);
-    this[toList] = insertAt(this[toList], edge === 'top' ? newIndex : newIndex + 1, draggedItem);
   }
 }

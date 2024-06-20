@@ -1,18 +1,13 @@
-<article>
-  <h2 class="mt-5 mb-3">Shared lists</h2>
+<Ui::Subsection @title="Nested lists">
 
   <p>
-    <code>\{{sortable-group}}</code>s won't accept elements from other groups unless they share the same <code>group</code>.
-  </p>
-
-  <p>
-    <code>name</code> is a custom feature provided by this library.
+    Nested lists work the same as other lists, since <code>\{{drop-target}}</code>s <code>onDrop()</code> event doesn't bubble up to parent <code>\{{drop-target}}</code>s (this behaviour can be modified by setting the option <code>allowDropOnChildren</code> to <code>true</code>)
   </p>
 
   <div class="row mb-3">
     <div class="col-md-8">
-      <Code @code={{this.jsCode}} @lang="js" />
-      <Code @code={{this.hbsCode}} @lang="hbs" />
+      <Ui::Code @code={{this.jsCode}} @lang="js" />
+      <Ui::Code @code={{this.hbsCode}} @lang="hbs" />
     </div>
     <div class="col-md-4">
       <ul class="list-group mb-3">
@@ -26,4 +21,4 @@
       </ul>
     </div>
   </div>
-</article>
+</Ui::Subsection>

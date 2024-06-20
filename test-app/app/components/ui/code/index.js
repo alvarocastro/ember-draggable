@@ -2,12 +2,15 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { stripIndent } from 'common-tags'
+import he from 'he';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/typescript';
 import handlebars from 'highlight.js/lib/languages/handlebars';
+import bash from 'highlight.js/lib/languages/bash';
 
 hljs.registerLanguage('js', javascript);
 hljs.registerLanguage('hbs', handlebars);
+hljs.registerLanguage('bash', bash);
 
 export default class UiCodeComponent extends Component {
   @tracked highlightedCode;
@@ -18,6 +21,7 @@ export default class UiCodeComponent extends Component {
     return ({
       js: 'Javascript',
       hbs: 'Handlebars',
+      bash: 'Terminal',
     })[this.lang];
   }
 
@@ -31,7 +35,7 @@ export default class UiCodeComponent extends Component {
   }
 
   highlightCode () {
-    const code = this.args.code ?? this.element.innerHTML;
+    const code = this.args.code ?? he.decode(this.element.innerHTML);
     let result;
     if (this.args.lang) {
       result = hljs.highlight(code, { language: this.args.lang });

@@ -1,0 +1,28 @@
+<ul class="list-group list-group-flush" ...attributes>
+  {{yield (hash
+    param=(component "ui/params/param")
+  )}}
+</ul>
+
+
+{{!--
+
+Alternative table version
+
+<ul class="list-group list-group-flush">
+  {{#each params as |param|}}
+    <li class="row border-bottom py-2">
+      <div class="col-2">
+        <span class="fw-bold">{{param.name}}</span>
+      </div>
+      <div class="col-2">
+        <code>{{param.default}}</code>
+      </div>
+      <div class="col-8">
+        {{param.description}}
+      </div>
+    </li>
+  {{/each}}
+</ul>
+
+--}}

@@ -1,0 +1,31 @@
+<li class="list-group-item" ...attributes>
+  <span class="font-monospace fw-bold text-light">{{@name}}</span>
+  {{!-- <code class="fs-6">{{@name}}</code> --}}
+
+  {{#if @required}}
+    <small class="px-2 py-1 rounded border ms-3 font-monospace text-danger">required</small> {{!text-uppercase}}
+  {{/if}}
+
+  <small class="px-2 py-1 rounded border ms-3 font-monospace text-body-secondary">{{@type}}</small>
+
+  {{#if @default}}
+    <small class="px-2 py-1 rounded border ms-3 font-monospace text-body-secondary fst-italic">default: {{@default}}</small>
+  {{/if}}
+
+  <p class="mt-1 mb-0">{{@description}}</p>
+</li>
+
+{{!--
+<li class="list-group-item d-flex" ...attributes>
+  <div class="col-4 font-monospace">
+    <span class="fw-bold text-light">{{@name}}</span>
+    <small class="text-body-secondary">{{@type}}</small>
+    {{#if @default}}
+      <small class="ms-4 font-monospace text-body-secondary fst-italic">{{@default}}</small>
+    {{/if}}
+  </div>
+  <div class="col-8">
+    {{@description}}
+  </div>
+</li>
+--}}

@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { insertAt, removeFrom } from 'ember-draggable/utils/array';
+import { insertBefore, insertAfter, removeItem } from 'ember-draggable/utils/array';
 
 class Item {
   @tracked childs = [];
@@ -11,6 +11,13 @@ class Item {
     this.childs = childs;
   }
 }
+
+const dump = function (node, depth = 0, indent = '  ') {
+  if (node.childs.length) {
+    return `new Item('${node.name}', [\n${indent.repeat(depth + 1)}${node.childs.map(child => dump(child, depth + 1, indent)).join(`,\n${indent.repeat(depth + 1)}`)}\n${indent.repeat(depth)}])`;
+  }
+  return `new Item('${node.name}')`;
+};
 
 export default class ExamplesNestedListsComponent extends Component {
   @tracked root = new Item('root', [
@@ -26,73 +33,76 @@ export default class ExamplesNestedListsComponent extends Component {
     new Item('Five')
   ]);
 
-  constructor () {
-    super(...arguments);
-    window.c = this;
-  }
-
-  get dumpCode () {
-    return `
-      this.itemsTop = ${JSON.stringify(this.itemsTop)};
-      this.itemsBottom = ${JSON.stringify(this.itemsBottom)};
-    `;
-  }
-
   hbsCode = `
-    <ul {{sortable-group
-      name="itemsTop"
-      group="shared"
-      onSort=this.sortItems
-      onAdd=this.addItem
-      onRemove=this.removeItem
-    }}>
-      {{#each this.itemsTop as |item|}}
-        <li {{sortable-item}} class="list-group-item">{{item}}</li>
+    <ul class="list-group mb-3">
+      {{#each this.root.childs as |item|}}
+        <TreeItem
+          @item={{item}}
+          @parent={{this.root}}
+          @onDrop={{this.move}}
+        />
       {{/each}}
     </ul>
 
-    <ul {{sortable-group
-      name="itemsBottom"
-      group="shared"
-      onSort=this.sortItems
-      onAdd=this.addItem
-      onRemove=this.removeItem
-    }}>
-      {{#each this.itemsBottom as |item|}}
-        <li {{sortable-item}} class="list-group-item">{{item}}</li>
-      {{/each}}
-    </ul>
+    {{! tree-item.hbs }}
+    <li {{sortable-item data=(hash item=@item parent=@parent) onDrop=@onDrop}}>
+      {{@item.name}}
+      {{#if @item.childs}}
+        <ul>
+          {{#each @item.childs as |child|}}
+            <Examples::NestedLists::TreeItem
+              @item={{child}}
+              @parent={{@item}}
+              @onDrop={{@onDrop}}
+            />
+          {{/each}}
+        </ul>
+      {{/if}}
+    </li>
   `;
 
   get jsCode () {
     return `
-      @tracked items = ${JSON.stringify(this.items, null, 2)};
+      class Item {
+        @tracked childs = [];
+
+        constructor (name, childs = []) {
+          this.name = name;
+          this.childs = childs;
+        }
+      }
+
+      export default class NestedListsComponent extends Component {
+        @tracked root = ${dump(this.root, 4)};
+
+        @action move ({ source, target }) {
+          const { data: { item: draggedItem, parent: draggedItemParent }, group: fromList } = source;
+          const { data: { item: dropTarget, parent: dropTargetParent }, group: toList, edge, tree } = target;
+
+          draggedItemParent.childs = removeItem(draggedItemParent.childs, draggedItem);
+
+          const parent = tree === 'make-child' ? dropTarget : dropTargetParent;
+          if (edge === 'top') {
+            parent.childs = insertBefore(parent.childs, dropTarget, draggedItem);
+          } else {
+            parent.childs = insertAfter(parent.childs, dropTarget, draggedItem);
+          }
+        }
+      }
     `;
   }
 
-  @action move ({
-    source: {
-      data: {
-        item: draggedItem,
-        parent: draggedItemParent,
-      },
-      group: fromList
-    },
-    target: {
-      data: {
-        item: dropTarget,
-        parent: dropTargetParent,
-      },
-      group: toList,
-      edge,
-      tree
-    },
-  }) {
-    const oldIndex = draggedItemParent.childs.indexOf(draggedItem);
-    draggedItemParent.childs = removeFrom(draggedItemParent.childs, oldIndex);
+  @action move ({ source, target }) {
+    const { data: { item: draggedItem, parent: draggedItemParent }, group: fromList } = source;
+    const { data: { item: dropTarget, parent: dropTargetParent }, group: toList, edge, tree } = target;
+
+    draggedItemParent.childs = removeItem(draggedItemParent.childs, draggedItem);
 
     const parent = tree === 'make-child' ? dropTarget : dropTargetParent;
-    const newIndex = parent.childs.indexOf(dropTarget);
-    parent.childs = insertAt(parent.childs, edge === 'top' ? newIndex : newIndex + 1, draggedItem);
+    if (edge === 'top') {
+      parent.childs = insertBefore(parent.childs, dropTarget, draggedItem);
+    } else {
+      parent.childs = insertAfter(parent.childs, dropTarget, draggedItem);
+    }
   }
 }

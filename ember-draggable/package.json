@@ -71,6 +71,7 @@
       "./modifiers/draggable-item-handle.js": "./dist/_app_/modifiers/draggable-item-handle.js",
       "./modifiers/draggable-item.js": "./dist/_app_/modifiers/draggable-item.js",
       "./modifiers/drop-target.js": "./dist/_app_/modifiers/drop-target.js",
+      "./modifiers/file-drop-target.js": "./dist/_app_/modifiers/file-drop-target.js",
       "./modifiers/sortable-item.js": "./dist/_app_/modifiers/sortable-item.js"
     }
   }

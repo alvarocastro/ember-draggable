@@ -1,0 +1,8 @@
+<nav class="nav nav-pills flex-column" ...attributes>
+  {{#each @items as |item|}}
+    <a class="nav-link" href="{{item.href}}">{{item.text}}</a>
+    {{#if item.items}}
+      <Ui::Nav @items={{item.items}} class="mb-2 ms-3" />
+    {{/if}}
+  {{/each}}
+</nav>

@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { insertAt, removeFrom } from 'ember-draggable/utils/array';
+import { insertBefore, insertAfter, removeItem } from 'ember-draggable/utils/array';
 
 class Column {
   @tracked cards = [];
@@ -40,20 +40,20 @@ export default class ExamplesBoardComponent extends Component {
 
   @action moveColumn ({
     source: {
-      data: draggedItem,
-      group: fromList
+      data: draggedItem
     },
     target: {
       data: dropTarget,
-      group: toList,
       edge
     }
   }) {
-    const oldIndex = this[fromList].indexOf(draggedItem);
-    this[fromList] = removeFrom(this[fromList], oldIndex);
+    this.columns = removeItem(this.columns, draggedItem);
 
-    const newIndex = this[toList].indexOf(dropTarget);
-    this[toList] = insertAt(this[toList], edge === 'left' ? newIndex : newIndex + 1, draggedItem);
+    if (edge === 'top') {
+      this.columns = insertBefore(this.columns, dropTarget, draggedItem);
+    } else {
+      this.columns = insertAfter(this.columns, dropTarget, draggedItem);
+    }
   }
 
   @action moveCard ({
@@ -61,22 +61,22 @@ export default class ExamplesBoardComponent extends Component {
       data: {
         item: draggedItem,
         parent: draggedItemParent,
-      },
-      group: fromList
+      }
     },
     target: {
       data: {
         item: dropTarget,
         parent: dropTargetParent,
       },
-      group: toList,
       edge
     },
   }) {
-    const oldIndex = draggedItemParent.cards.indexOf(draggedItem);
-    draggedItemParent.cards = removeFrom(draggedItemParent.cards, oldIndex);
+    draggedItemParent.cards = removeItem(draggedItemParent.cards, draggedItem);
 
-    const newIndex = dropTarget ? dropTargetParent.cards.indexOf(dropTarget) : 0;
-    dropTargetParent.cards = insertAt(dropTargetParent.cards, edge === 'top' ? newIndex : newIndex + 1, draggedItem);
+    if (edge === 'top') {
+      dropTargetParent.cards = insertBefore(dropTargetParent.cards, dropTarget, draggedItem);
+    } else {
+      dropTargetParent.cards = insertAfter(dropTargetParent.cards, dropTarget, draggedItem);
+    }
   }
 }

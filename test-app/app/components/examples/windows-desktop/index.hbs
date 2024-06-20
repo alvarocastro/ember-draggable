@@ -2,7 +2,7 @@
   .desktop {
     position: relative;
     background: #008080;
-    width: 600px;
+    /*width: 600px;*/
     height: 400px;
     overflow: hidden;
   }
@@ -22,28 +22,67 @@
     font-size: 14px;
     text-align: center;
   }
+
+  .bsod {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: blue;
+    font-family: monospace;
+  }
+  .bsod .message {
+    max-width: 400px;
+  }
+  .bsod .title {
+    text-align: center;
+  }
+  .bsod .title span {
+    background: gray;
+    color: blue;
+    padding: 0 8px;
+  }
 </style>
 
-<div class="desktop"
-  {{drop-target onDrop=this.move}}
->
-  {{#each this.icons as |icon|}}
+<Ui::Subsection @title="Windows 98">
+  <p>
+    This example showcases the separate uses of <code>\{{draggable-item}}</code> and <code>\{{drop-target}}.</code>
+  </p>
+
+  <p>
+    <code>\{{draggable-item}}</code> allows the icons to be dragged around, and <code>\{{drop-target}}</code> is used for the whole container (the desktop) to capture the new drop coordinates, and also the trash bin icon to allow you to delete stuff.
+  </p>
+
+  <div class="desktop" {{drop-target onDrop=this.move}}>
+    {{#each this.icons as |icon|}}
+      <div
+        class="desktop-icon"
+        style="{{icon.position}}"
+        {{draggable-item data=icon}}
+      >
+        <img src="{{icon.image}}" />
+        <span>{{icon.name}}</span>
+      </div>
+    {{/each}}
     <div
       class="desktop-icon"
-      style="{{icon.position}}"
-      {{draggable-item data=icon}}
+      style="{{this.trash.position}}"
+      {{draggable-item data=this.trash}}
+      {{drop-target onDrop=this.delete data=this.trash}}
     >
-      <img src="{{icon.image}}" />
-      <span>{{icon.name}}</span>
+      <img src="{{this.trash.image}}" />
+      <span>{{this.trash.name}}</span>
     </div>
-  {{/each}}
-  <div
-    class="desktop-icon"
-    style="{{this.trash.position}}"
-    {{draggable-item data=this.trash}}
-    {{drop-target onDrop=this.delete data=this.trash}}
-  >
-    <img src="{{this.trash.image}}" />
-    <span>{{this.trash.name}}</span>
+
+    {{#if this.isFatalErrorState}}
+      <div class="bsod d-flex justify-content-center align-items-center">
+        <div class="message">
+          <p class="title">
+            <span>WINDOWS</span>
+          </p>
+          <p>An error has occurred.</p>
+          <p>Press F5 to restart your computer. If you do this, you will lose any unsaved information in the current tab.</p>
+        </div>
+      </div>
+    {{/if}}
   </div>
-</div>
+</Ui::Subsection>

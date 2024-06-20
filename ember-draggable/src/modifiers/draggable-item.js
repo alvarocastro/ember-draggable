@@ -5,10 +5,10 @@ import { CLASS, prepareDataForCallback } from './drop-target.js';
 /**
  * Modifier to make a DOM element draggable.
  *
- * @param {DOMElement} element Draggable DOM element.
+ * @param {HTMLElement} element Draggable DOM element.
  * @param {any} options.data Data to associate with the item.
  * @param {String} [options.group] Name of the group this item belongs to.
- * @param {String} [options.dragHandleElement] Element that acts as the drag handle.
+ * @param {HTMLElement} [options.dragHandleElement] Element that acts as the drag handle.
  * @param {Boolean} [disabled] Prevents the element to be dragged.
  * @param {String} [options.isDraggingClass] Class added to the element when it is being drag.
  * @param {Function} [options.onDragStart] Callback fired when the drag starts.

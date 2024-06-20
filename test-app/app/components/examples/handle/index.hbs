@@ -1,15 +1,16 @@
-<article>
-  <h2 class="mt-5 mb-3">Drag handle</h2>
-
+<Ui::Subsection @title="Drag handle">
   <p>
-    You can specify the dragging handle element using the <code>\{{sortable-item-handle}}</code>. This will override the default behaviour of making the whole item draggable.
+    You can specify the dragging handle element using the <code>\{{draggable-item-handle}}</code>. This will override the default behaviour of making the whole item draggable.
   </p>
 
-  <div class="row mb-3">
+  <Ui::Alert::Info>
+    Alternatively, the <code>\{{draggable-item}}</code> and <code>\{{sortable-item}}</code> modifiers can receive an element reference via the <code>dragHandleElement</code> option to act as the handle.
+  </Ui::Alert::Info>
+
+  <div class="row">
     <div class="col-md-8">
-      <Code @code={{this.jsCode}} @lang="js" />
-      <Code @code={{this.hbsCode}} @lang="hbs" />
-      {{!-- <Code @code={{this.dumpCode}} @lang="js" /> --}}
+      <Ui::Code @code={{this.jsCode}} @lang="js" />
+      <Ui::Code @code={{this.hbsCode}} @lang="hbs" />
     </div>
     <div class="col-md-4">
       <ul class="list-group mb-3">
@@ -25,4 +26,4 @@
       </ul>
     </div>
   </div>
-</article>
+</Ui::Subsection>

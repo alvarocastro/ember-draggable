@@ -1,0 +1,54 @@
+<Ui::Section @title="Introduction">
+  <p>
+    Popular drag and drop libraries like <a href="https://bevacqua.github.io/dragula/" target="_blank">Dragula</a> and <a href="https://sortablejs.github.io/Sortable/" target="_blank">Sortable.js</a> manipulate the DOM, which conflicts with Ember.js and Glimmer. This library is an implementation of the pragmatic <a href="https://atlassian.design/components/pragmatic-drag-and-drop/about" target="_blank">drag and drop library from Atlassian</a> which doesn't manipulate the DOM, allowing us to leverage that task to Ember.js.
+  </p>
+
+  <p>
+    Also, other Ember.js drag and drop addons have their logic implemented through components, which end up adding unwanted DOM elements in our templates, or are too specific and limited to just sort lists.
+  </p>
+
+  <p>
+    This addon aims to provide a set of core modifiers (to avoid adding extra markup) that leverage the native drag and drop implementation of the browsers while also providing flexibility to create any kind of draggable interface.
+  </p>
+
+  <Ui::Subsection @title="Installation">
+    <Ui::Code @lang="bash">
+      npm install -d ember-draggable
+    </Ui::Code>
+  </Ui::Subsection>
+
+  <Ui::Subsection @title="Usage">
+    <p>
+      This is the most basic example using the <code>\{{sortable-item}}</code> modifier, which combines the functionallity of both <code>\{{draggable-item}}</code> and <code>\{{drop-target}}</code> modifiers.
+    </p>
+
+    <p>
+      The actual reordering is done in the the <code>move()</code> action, leveraged by the optional array utils provided with this addon, you can use your own custom logic if needed.
+    </p>
+
+    <div class="row mb-3">
+      <div class="col-md-8">
+        <Ui::Code @code={{this.hbsCode}} @lang="hbs" />
+        <Ui::Code @code={{this.jsCode}} @lang="js" />
+      </div>
+      <div class="col-md-4">
+        <ul class="list-group mb-3">
+          {{#each this.items as |item|}}
+            <li
+              {{sortable-item data=item onDrop=this.move}}
+              class="list-group-item"
+            >
+              {{item}}
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+
+    {{!--
+    <Ui::Alert @type="info">
+      <Ui::Icon @name="lightbulb" @class="me-2" /><code>insertBefore()</code>, <code>insertAfter()</code> and <code>removeItem()</code> functions come from an array utils library bundled in the addon to ease the manipulation of arrays.
+    </Ui::Alert>
+    --}}
+  </Ui::Subsection>
+</Ui::Section>

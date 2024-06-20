@@ -8,8 +8,7 @@ export default class UiIconComponent extends Component {
     return [
       `fa-${this.args.style ?? 'solid'}`,
       `fa-${this.args.name}`,
-      (this.args.fw ?? true) && 'fa-fw',
-      this.args.class
+      (this.args.fw ?? true) && 'fa-fw'
     ].filter(Boolean).join(' ');
   }
 }
