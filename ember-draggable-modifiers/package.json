@@ -1,13 +1,18 @@
 {
-  "name": "ember-draggable",
-  "version": "0.0.0",
-  "description": "The default blueprint for Embroider v2 addons.",
+  "name": "ember-draggable-modifiers",
+  "version": "0.0.1",
+  "description": "Drag and drop modifiers for Ember.js",
   "keywords": [
     "ember-addon"
+    "modifiers",
+    "drag",
+    "drop",
+    "drag-drop",
+    "sort"
   ],
-  "repository": "",
+  "repository": "https://github.com/alvarocastro/ember-draggable-modifiers",
   "license": "MIT",
-  "author": "",
+  "author": "Alvaro Castro",
   "exports": {
     ".": "./dist/index.js",
     "./*": "./dist/*.js",

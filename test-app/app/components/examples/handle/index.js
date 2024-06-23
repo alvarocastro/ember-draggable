@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { insertBefore, insertAfter, removeItem } from 'ember-draggable/utils/array';
+import { insertBefore, insertAfter, removeItem } from 'ember-draggable-modifiers/utils/array';
 
 export default class ExamplesHandleComponent extends Component {
   @tracked items = [ 'One', 'Two', 'Three', 'Four', 'Five' ];

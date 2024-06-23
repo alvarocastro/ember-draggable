@@ -3,7 +3,7 @@
 ## Installation
 
 - `git clone <repository-url>`
-- `cd ember-draggable`
+- `cd ember-draggable-modifiers`
 - `npm install`
 
 ## Linting
@@ -13,7 +13,7 @@
 
 ## Building the addon
 
-- `cd ember-draggable`
+- `cd ember-draggable-modifiers`
 - `npm build`
 
 ## Running tests

@@ -1,4 +1,4 @@
-# ember-draggable
+# ember-draggable-modifiers
 
 [Short description of the addon.]
 
@@ -10,7 +10,7 @@
 ## Installation
 
 ```
-ember install ember-draggable
+ember install ember-draggable-modifiers
 ```
 
 ## Usage

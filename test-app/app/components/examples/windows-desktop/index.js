@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { insertAt, removeFrom } from 'ember-draggable/utils/array';
+import { insertAt, removeFrom } from 'ember-draggable-modifiers/utils/array';
 import { htmlSafe } from '@ember/template';
 
 class Icon {

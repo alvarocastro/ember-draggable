@@ -16,6 +16,8 @@ import dropTarget from './drop-target.js';
  * @param {Boolean} [options.allowDropOnItself=false] Allow an element to drop on itself if it's both a draggable item and drop target.
  * @param {Boolean} [options.allowDropOnChildren=false] Allow the target to receive drops from a parent draggable (this option is valid for nested targets)
  * @param {Boolean} [disabled] Prevents the element to be dragged or receive drops.
+ * @param {Boolean} [disabledDrag] Prevents the element to be dragged.
+ * @param {Boolean} [disabledDrop] Prevents the element to receive drops.
  * @param {String} [options.isDraggingClass] Class added to the element when it is being drag.
  * @param {String} [options.isOnTargetClass] Class added to the element when an item is dragged over.
  * @param {Function} [options.canDrop] Callback used to conditionally allow drops.
