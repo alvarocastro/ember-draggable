@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Drag and drop modifiers for Ember.js",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
     "modifiers",
     "drag",
     "drop",
