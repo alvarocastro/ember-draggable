@@ -28,15 +28,18 @@ import dropTarget from './drop-target.js';
  * @param {Function} [options.onDragStart] Callback fired when the drag starts.
  * @param {Function} [options.onDragEnd] Callback fired when the item is dropped.
  */
-export default modifier(function sortableItem (element, positional, named) {
-  return combine(
-    draggableItem(element, positional, {
-      ...named,
-      disabled: named.disabled ?? named.disabledDrag
-    }),
-    dropTarget(element, positional, {
-      ...named,
-      disabled: named.disabled ?? named.disabledDrop
-    })
-  );
-}, { eager: false });
+export default modifier(
+  function sortableItem(element, positional, named) {
+    return combine(
+      draggableItem(element, positional, {
+        ...named,
+        disabled: named.disabled ?? named.disabledDrag,
+      }),
+      dropTarget(element, positional, {
+        ...named,
+        disabled: named.disabled ?? named.disabledDrop,
+      }),
+    );
+  },
+  { eager: false },
+);

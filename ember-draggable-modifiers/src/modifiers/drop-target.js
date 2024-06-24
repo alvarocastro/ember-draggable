@@ -1,8 +1,13 @@
 import { modifier } from 'ember-modifier';
 import { dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
-import { attachClosestEdge, extractClosestEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge';
-import { attachInstruction, extractInstruction } from '@atlaskit/pragmatic-drag-and-drop-hitbox/tree-item';
-import { preventUnhandled } from '@atlaskit/pragmatic-drag-and-drop/prevent-unhandled';
+import {
+  attachClosestEdge,
+  extractClosestEdge,
+} from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge';
+import {
+  attachInstruction,
+  extractInstruction,
+} from '@atlaskit/pragmatic-drag-and-drop-hitbox/tree-item';
 
 export const CLASS = {
   DRAGGING: 'is-dragging',
@@ -14,8 +19,8 @@ export const DIRECTION = {
   HORIZONTAL: 'horizontal',
 };
 export const DIRECTION_EDGES = {
-  [DIRECTION.VERTICAL]: [ 'top', 'bottom' ],
-  [DIRECTION.HORIZONTAL]: [ 'left', 'right' ],
+  [DIRECTION.VERTICAL]: ['top', 'bottom'],
+  [DIRECTION.HORIZONTAL]: ['left', 'right'],
 };
 
 /**
@@ -28,12 +33,14 @@ export const prepareDataForCallback = function (event) {
     data: event.source.data.data,
     group: event.source.data.group,
   };
-  const target = event.self ? {
-    data: event.self.data.data,
-    group: event.self.data.group,
-    edge: extractClosestEdge(event.self.data),
-    tree: extractInstruction(event.self.data).type,
-  } : {};
+  const target = event.self
+    ? {
+        data: event.self.data.data,
+        group: event.self.data.group,
+        edge: extractClosestEdge(event.self.data),
+        tree: extractInstruction(event.self.data).type,
+      }
+    : {};
 
   return {
     source,
@@ -52,7 +59,7 @@ export const getNestedDepth = function (event) {
   const targets = event.location.current.dropTargets;
   const element = event.self.element;
 
-  return targets.indexOf(targets.find(target => target.element === element));
+  return targets.indexOf(targets.find((target) => target.element === element));
 };
 
 /**
@@ -73,89 +80,102 @@ export const getNestedDepth = function (event) {
  * @param {Function} [option.onDragEnter] Callback fired when a dragged item enters this target.
  * @param {Function} [option.onDragLeave] Callback fired when a dragged item leaves this target.
  */
-export default modifier(function dropTarget (element, positional, {
-  data,
-  group,
-  accepts = [],
-  direction = DIRECTION.VERTICAL, // 'vertical' | 'horizontal'
-  allowedEdges, // [ 'top', 'bottom', 'left', 'right' ]
-  allowDropOnItself = false,
-  allowDropOnChildren = false,
-  disabled = false,
-  isOnTargetClass = CLASS.DROP_TARGET_ITEM,
-  canDrop = (payload, canDrop) => canDrop,
-  onDrop = () => {},
-  onHover = () => {},
-  onDragEnter = () => {},
-  onDragLeave = () => {},
-} = {}) {
-  return dropTargetForElements({
-    element: element,
-    canDrop: (event) => {
-      const { source: { data, element: draggedElement } } = event;
-      let result = true;
+export default modifier(
+  function dropTarget(
+    element,
+    positional,
+    {
+      data,
+      group,
+      accepts = [],
+      direction = DIRECTION.VERTICAL, // 'vertical' | 'horizontal'
+      allowedEdges, // [ 'top', 'bottom', 'left', 'right' ]
+      allowDropOnItself = false,
+      allowDropOnChildren = false,
+      disabled = false,
+      isOnTargetClass = CLASS.DROP_TARGET_ITEM,
+      canDrop = (payload, canDrop) => canDrop,
+      onDrop = () => {},
+      onHover = () => {},
+      onDragEnter = () => {},
+      onDragLeave = () => {},
+    } = {},
+  ) {
+    return dropTargetForElements({
+      element: element,
+      canDrop: (event) => {
+        const {
+          source: { data, element: draggedElement },
+        } = event;
+        let result = true;
 
-      if (disabled) {
-        result = false;
-      } else if (!allowDropOnChildren && draggedElement.contains(element)) {
-        result = false;
-      } else if (!allowDropOnItself && element === draggedElement) {
-        result = false;
-      } else {
-        result = accepts.length ? accepts.includes(data.group) : data.group === group;
-      }
-      return canDrop(prepareDataForCallback(event), result);
-    },
-    getData: ({ input, element }) => {
-      let payload = { data, group };
+        if (disabled) {
+          result = false;
+        } else if (!allowDropOnChildren && draggedElement.contains(element)) {
+          result = false;
+        } else if (!allowDropOnItself && element === draggedElement) {
+          result = false;
+        } else {
+          result = accepts.length
+            ? accepts.includes(data.group)
+            : data.group === group;
+        }
+        return canDrop(prepareDataForCallback(event), result);
+      },
+      getData: ({ input, element }) => {
+        let payload = { data, group };
 
-      payload = attachClosestEdge(payload, {
-        input,
-        element,
-        allowedEdges: allowedEdges ?? DIRECTION_EDGES[direction],
-      });
+        payload = attachClosestEdge(payload, {
+          input,
+          element,
+          allowedEdges: allowedEdges ?? DIRECTION_EDGES[direction],
+        });
 
-      payload = attachInstruction(payload, {
-        input,
-        element,
-        currentLevel: 2,
-        indentPerLevel: 20,
-        mode: 'standard',
-      });
+        payload = attachInstruction(payload, {
+          input,
+          element,
+          currentLevel: 2,
+          indentPerLevel: 20,
+          mode: 'standard',
+        });
 
-      return payload;
-    },
-    onDragEnter: (event) => {
-      element.classList.add(isOnTargetClass);
-      onDragEnter(prepareDataForCallback(event));
-    },
-    onDragLeave: (event) => {
-      element.classList.remove(isOnTargetClass);
-      delete element.dataset.dropEdge;
-      delete element.dataset.treeInstruction;
-      onDragLeave(prepareDataForCallback(event));
-    },
-    onDrag: (event) => {
-      const depth = getNestedDepth(event);
-      if (depth > 0) {
+        return payload;
+      },
+      onDragEnter: (event) => {
+        element.classList.add(isOnTargetClass);
+        onDragEnter(prepareDataForCallback(event));
+      },
+      onDragLeave: (event) => {
         element.classList.remove(isOnTargetClass);
         delete element.dataset.dropEdge;
         delete element.dataset.treeInstruction;
-        return;
-      }
-      element.classList.add(isOnTargetClass);
-      element.dataset.dropEdge = extractClosestEdge(event.self.data);
-      element.dataset.treeInstruction = extractInstruction(event.self.data).type;
-      onHover(prepareDataForCallback(event));
-    },
-    onDrop: (event) => {
-      element.classList.remove(isOnTargetClass);
-      delete element.dataset.dropEdge;
-      delete element.dataset.treeInstruction;
+        onDragLeave(prepareDataForCallback(event));
+      },
+      onDrag: (event) => {
+        const depth = getNestedDepth(event);
+        if (depth > 0) {
+          element.classList.remove(isOnTargetClass);
+          delete element.dataset.dropEdge;
+          delete element.dataset.treeInstruction;
+          return;
+        }
+        element.classList.add(isOnTargetClass);
+        element.dataset.dropEdge = extractClosestEdge(event.self.data);
+        element.dataset.treeInstruction = extractInstruction(
+          event.self.data,
+        ).type;
+        onHover(prepareDataForCallback(event));
+      },
+      onDrop: (event) => {
+        element.classList.remove(isOnTargetClass);
+        delete element.dataset.dropEdge;
+        delete element.dataset.treeInstruction;
 
-      if (getNestedDepth(event) === 0) {
-        onDrop(prepareDataForCallback(event));
-      }
-    },
-  });
-}, { eager: false });
+        if (getNestedDepth(event) === 0) {
+          onDrop(prepareDataForCallback(event));
+        }
+      },
+    });
+  },
+  { eager: false },
+);

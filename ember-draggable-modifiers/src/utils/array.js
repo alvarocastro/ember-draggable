@@ -5,9 +5,9 @@
  * @param {any} item
  * @returns {Array} []
  */
-export function insertAt (arr, index, item) {
-  const clone = [ ...arr ];
-  clone.splice(index, 0, item)
+export function insertAt(arr, index, item) {
+  const clone = [...arr];
+  clone.splice(index, 0, item);
   return clone;
 }
 
@@ -17,8 +17,8 @@ export function insertAt (arr, index, item) {
  * @param {Number} index
  * @returns {Array} []
  */
-export function removeAt (arr, index) {
-  const clone = [ ...arr ];
+export function removeAt(arr, index) {
+  const clone = [...arr];
   clone.splice(index, 1);
   return clone;
 }
@@ -30,7 +30,7 @@ export function removeAt (arr, index) {
  * @param {any} item
  * @return {Array} []
  */
-export function insertBefore (arr, targetItem, item) {
+export function insertBefore(arr, targetItem, item) {
   return insertAt(arr, arr.indexOf(targetItem), item);
 }
 
@@ -41,7 +41,7 @@ export function insertBefore (arr, targetItem, item) {
  * @param {any} item
  * @return {Array} []
  */
-export function insertAfter (arr, targetItem, item) {
+export function insertAfter(arr, targetItem, item) {
   return insertAt(arr, arr.indexOf(targetItem) + 1, item);
 }
 
@@ -51,6 +51,6 @@ export function insertAfter (arr, targetItem, item) {
  * @param {any} item
  * @return {Array} []
  */
-export function removeItem (arr, item) {
+export function removeItem(arr, item) {
   return removeAt(arr, arr.indexOf(item));
 }
