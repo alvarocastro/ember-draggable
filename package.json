@@ -1,29 +1,55 @@
 {
+  "version": "0.0.1",
   "private": true,
-  "repository": "",
-  "license": "MIT",
-  "author": "",
+  "repository": "https://github.com/alvarocastro/ember-draggable-modifiers",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "build": "npm run build --workspace ember-draggable-modifiers",
-    "lint": "npm run lint --workspaces --if-present",
-    "lint:fix": "npm run lint:fix --workspaces --if-present",
-    "prepare": "npm run build",
+    "build": "pnpm --filter ember-draggable-modifiers build",
+    "preinstall": "npx only-allow pnpm",
+    "lint": "pnpm --filter '*' lint",
+    "lint:fix": "pnpm --filter '*' lint:fix",
+    "prepare": "pnpm build",
+    "release": "release-it",
     "start": "concurrently 'npm:start:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
-    "start:addon": "npm start --workspace ember-draggable-modifiers -- --no-watch.clearScreen",
-    "start:test-app": "npm start --workspace test-app",
-    "test": "npm run test --workspaces --if-present",
-    "test:ember": "npm run test:ember --workspaces --if-present"
+    "start:addon": "pnpm --filter ember-draggable-modifiers start --no-watch.clearScreen",
+    "start:test-app": "pnpm --filter test-app start",
+    "test": "pnpm --filter '*' test:ember"
   },
   "devDependencies": {
+    "@release-it-plugins/workspaces": "^4.2.0",
     "concurrently": "^8.2.0",
     "prettier": "^3.0.3",
-    "prettier-plugin-ember-template-tag": "^1.1.0"
+    "prettier-plugin-ember-template-tag": "^1.1.0",
+    "release-it": "^17.4.0"
   },
-  "workspaces": [
-    "ember-draggable-modifiers",
-    "test-app"
-  ],
-  "dependencies": {
-    "slugify": "^1.6.6"
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "release-it": {
+    "hooks": {
+      "before:init": "cp README.md LICENSE.md packages/ember-draggable-modifiers/",
+      "after:bump": "pnpm install"
+    },
+    "plugins": {
+      "@release-it-plugins/lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      },
+      "@release-it-plugins/workspaces": {
+        "workspaces": [
+          "packages/ember-draggable-modifiers"
+        ]
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    },
+    "npm": false
   }
 }
