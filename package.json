@@ -32,11 +32,13 @@
       "before:init": "cp README.md LICENSE.md packages/ember-draggable-modifiers/",
       "after:bump": "pnpm install"
     },
-    "plugins": {
+    "_plugins": {
       "@release-it-plugins/lerna-changelog": {
         "infile": "CHANGELOG.md",
         "launchEditor": true
-      },
+      }
+    },
+    "plugins": {
       "@release-it-plugins/workspaces": {
         "workspaces": [
           "packages/ember-draggable-modifiers"
