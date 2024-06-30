@@ -1,8 +1,18 @@
 # ember-draggable-modifiers
 
-[![NPM Version](https://img.shields.io/npm/v/ember-draggable-modifiers)](https://www.npmjs.com/package/ember-draggable-modifiers)
-[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/alvarocastro/ember-draggable-modifiers)](https://codeclimate.com/github/alvarocastro/ember-draggable-modifiers)
-[![Ember Observer Score](https://emberobserver.com/badges/ember-draggable-modifiers.svg)](https://emberobserver.com/addons/ember-draggable-modifiers)
+[![NPM Version][npm-badge]][npm-link]
+[![GitHub Actions Workflow Status][github-build-badge]][github-build-link]
+[![Code Climate maintainability][codeclimate-badge]][codeclimate-link]
+[![Ember Observer Score][ember-observer-badge]][ember-observer-link]
+
+[npm-badge]: https://img.shields.io/npm/v/ember-draggable-modifiers
+[npm-link]: https://www.npmjs.com/package/ember-draggable-modifiers
+[github-build-badge]: https://img.shields.io/github/actions/workflow/status/alvarocastro/ember-draggable-modifiers/ci.yml
+[github-build-link]: https://github.com/alvarocastro/ember-draggable-modifiers/actions/workflows/ci.yml
+[codeclimate-badge]: https://img.shields.io/codeclimate/maintainability/alvarocastro/ember-draggable-modifiers
+[codeclimate-link]: https://codeclimate.com/github/alvarocastro/ember-draggable-modifiers
+[ember-observer-badge]: https://emberobserver.com/badges/ember-draggable-modifiers.svg
+[ember-observer-link]: https://emberobserver.com/addons/ember-draggable-modifiers
 
 Drag and drop modifiers for Ember.js internally powered by the Atlassian Design System.
 
