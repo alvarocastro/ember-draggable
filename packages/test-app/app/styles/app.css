@@ -1,1 +1,476 @@
-/* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+/* * * * * Drag Drop * * * * */
+.drop-target-item {
+  background: gray;
+}
+
+.is-dragging {
+  opacity: 0.5;
+}
+
+/* * /
+[data-drop-edge]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+[data-drop-edge="top"]::before {
+  border-top: 3px solid red; bottom: auto;
+}
+[data-drop-edge="bottom"]::before {
+  border-top: 3px solid red; top: auto;
+}
+[data-drop-edge="left"]::before {
+  border-left: 3px solid red; right: auto;
+}
+[data-drop-edge="right"]::before {
+  border-left: 3px solid red; left: auto;
+}
+/ **/
+[data-drop-tree-intruction]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+/*
+[data-drop-tree-intruction="make-child"] {
+}
+
+reorder-above
+reorder-below
+reparent
+*/
+
+/* * * * * Examples * * * * */
+
+.board-column {
+  width: 260px;
+}
+
+.desktop {
+  position: relative;
+  background: #008080;
+  height: 400px;
+  overflow: hidden;
+}
+
+.desktop-icon {
+  position: absolute;
+  width: 96px;
+}
+
+.desktop-icon img {
+  pointer-events: none;
+  margin: 0 auto 4px;
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+
+.desktop-icon span {
+  display: block;
+  font-size: 14px;
+  text-align: center;
+}
+
+.bsod {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: blue;
+  font-family: monospace;
+}
+
+.bsod .message {
+  max-width: 400px;
+}
+
+.bsod .title {
+  text-align: center;
+}
+
+.bsod .title span {
+  background: gray;
+  color: blue;
+  padding: 0 8px;
+}
+
+/* * * * * Fancy backgrounds * * * * */
+
+.fancy-background-1 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 200px;
+  --c1: var(--c);
+  --c2: hsl(from var(--c) h s calc(l + var(--v)));
+  --g: #0000 8%, var(--c1) 0 17%, #0000 0 58%;
+
+  background:
+    linear-gradient(135deg, #0000 20.5%, var(--c1) 0 29.5%, #0000 0) 0
+      calc(var(--s) / 4),
+    linear-gradient(45deg, var(--g)) calc(var(--s) / 2) 0,
+    linear-gradient(135deg, var(--g), var(--c1) 0 67%, #0000 0),
+    linear-gradient(
+      45deg,
+      var(--g),
+      var(--c1) 0 67%,
+      #0000 0 83%,
+      var(--c1) 0 92%,
+      #0000 0
+    ),
+    var(--c2);
+  background-size: var(--s) var(--s);
+}
+
+.fancy-background-2 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 60px;
+  --c1: hsl(from var(--c) h s calc(l + var(--v)));
+  --c2: hsl(from var(--c) h s calc(l - var(--v)));
+  --c3: var(--c);
+
+  background:
+    var(--s) var(--s) / calc(var(--s) * 2) calc(var(--s) * 2)
+      linear-gradient(
+        135deg,
+        var(--c1) 10%,
+        var(--c2) 0 25%,
+        transparent 0 75%,
+        var(--c2) 0 90%,
+        var(--c1) 90%
+      ),
+    0 0 / calc(var(--s) * 2) calc(var(--s) * 2)
+      linear-gradient(
+        135deg,
+        var(--c1) 10%,
+        var(--c3) 0 25%,
+        transparent 0 75%,
+        var(--c3) 0 90%,
+        var(--c1) 90%
+      ),
+    0 0 / calc(var(--s) * 2) calc(var(--s) * 2)
+      linear-gradient(
+        45deg,
+        var(--c1) 10%,
+        var(--c2) 0 25%,
+        var(--c3) 0 40%,
+        var(--c1) 0 60%,
+        var(--c3) 0 75%,
+        var(--c2) 0 90%,
+        var(--c1) 90%
+      );
+}
+
+.fancy-background-3 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 50px;
+  --c1: hsl(from var(--c) h s calc(l + var(--v)));
+  --c2: var(--c);
+
+  background:
+    radial-gradient(
+      circle at 100% 50%,
+      transparent 20%,
+      var(--c1) 21%,
+      var(--c1) 34%,
+      transparent 35%,
+      transparent
+    ),
+    radial-gradient(
+        circle at 0% 50%,
+        transparent 20%,
+        var(--c1) 21%,
+        var(--c1) 34%,
+        transparent 35%,
+        transparent
+      )
+      0 calc(var(--s) * -1);
+  background-color: var(--c2);
+  background-size: calc(var(--s) * 1.5) calc(var(--s) * 2);
+}
+
+.fancy-background-4 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 150px;
+  --c1: var(--c);
+  --c2: hsl(from var(--c) h s calc(l + var(--v)));
+  --c3: hsl(from var(--c) h s calc(l + var(--v) * 2));
+  --c4: hsl(from var(--c) h s calc(l + var(--v) * 3));
+  --gp: 50% / var(--s) var(--s);
+
+  background:
+    repeating-conic-gradient(
+        from 90deg at 75% 75%,
+        var(--c4) 0% 25%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from 180deg at 50% 75%,
+        var(--c1) 0% 12.5%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from 135deg at 62.5% 62.5%,
+        var(--c4) 0% 25%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from 134.5deg at 25% 75%,
+        var(--c1) 0% 12.65%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from 135deg at 12.5% 62.5%,
+        var(--c4) 0% 25%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from 225deg at 12.5% 62.5%,
+        var(--c3) 0% 25%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from 225deg at 25% 50%,
+        var(--c2) 0% 12.5%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from 90deg at 75% 75%,
+        var(--c1) 0% 25%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from 135deg at 50% 50%,
+        var(--c1) 0% 37.5%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from 225deg at 75% 50%,
+        var(--c2) 0% 12.5%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from 45deg at 62.5% 62.5%,
+        var(--c3) 0% 25%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from 90deg at 75% 25%,
+        var(--c3) 0% 25%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from 45deg at 62.5% 12.5%,
+        var(--c3) 0% 25%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from -45deg at 62.5% 12.5%,
+        var(--c4) 0% 25%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from 45deg at 50% 25%,
+        var(--c2) 0% 12.5%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from -45deg at 12.5% 12.5%,
+        var(--c4) 0% 25%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from 0deg at 0% 25%,
+        var(--c3) 0% 12.5%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-conic-gradient(
+        from -90deg at 25% 25%,
+        var(--c2) 0% 12.5%,
+        #fff0 0% 100%
+      )
+      var(--gp),
+    repeating-linear-gradient(
+        180deg,
+        var(--c1) 0 25%,
+        var(--c2) 0 50%,
+        var(--c1) 0 100%
+      )
+      var(--gp);
+  background-color: var(--c1);
+}
+
+.fancy-background-5 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 100px; /* diameter */
+  --t: 4px; /* thickness */
+  --o: 10px; /* offset */
+  --c1: hsl(from var(--c) h s calc(l + var(--v)));
+  --c2: var(--c);
+
+  background-color: var(--c2);
+  background-size: calc(var(--s) * 2 + var(--t) * 2)
+    calc(var(--s) * 2 + var(--t) * 2);
+  background-image: radial-gradient(
+      transparent var(--s),
+      var(--c1) var(--s),
+      var(--c1) calc(var(--s) + var(--t)),
+      transparent calc(var(--s) + var(--t))
+    ),
+    radial-gradient(
+      transparent var(--s),
+      var(--c1) var(--s),
+      var(--c1) calc(var(--s) + var(--t)),
+      transparent calc(var(--s) + var(--t))
+    );
+  background-position:
+    var(--o) var(--o),
+    calc(var(--s) + var(--t) + var(--o)) calc(var(--s) + var(--t) + var(--o));
+}
+
+.fancy-background-6 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 200px; /* size */
+  --c1: hsl(from var(--c) h s calc(l + var(--v)));
+  --c2: var(--c);
+
+  background: linear-gradient(135deg, #0000 18.75%, var(--c2) 0 31.25%, #0000 0),
+    repeating-linear-gradient(45deg, var(--c2) -6.25% 6.25%, var(--c1) 0 18.75%);
+  background-size: var(--s) var(--s);
+}
+
+.fancy-background-7 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 50px; /* size */
+  --c1: hsl(from var(--c) h s calc(l + var(--v)));
+  --c2: var(--c);
+
+  background:
+    linear-gradient(135deg, var(--c1) 25%, transparent 25%)
+      calc(var(--s) * -1.5) 0,
+    linear-gradient(225deg, var(--c1) 25%, transparent 25%)
+      calc(var(--s) * -1.5) 0,
+    linear-gradient(315deg, var(--c1) 25%, transparent 25%),
+    linear-gradient(45deg, var(--c1) 25%, transparent 25%);
+  background-size: var(--s) var(--s);
+  background-color: var(--c2);
+}
+
+.fancy-background-8 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 90px;
+  --c1: hsl(from var(--c) h s calc(l + var(--v)));
+  --c2: hsl(from var(--c) h s calc(l - var(--v)));
+  --c3: var(--c);
+  --s1: calc(var(--s) * 0.5);
+  --s2: calc(var(--s) * 0.6);
+
+  background:
+    radial-gradient(
+        circle,
+        var(--c1) calc(var(--s1) / 2),
+        #0000 calc(var(--s1) / 2),
+        #0000 var(--s1),
+        var(--c2) var(--s1),
+        var(--c2) var(--s2),
+        #0000 var(--s2)
+      )
+      0 0,
+    radial-gradient(
+        circle,
+        var(--c2) calc(var(--s1) / 2),
+        #0000 calc(var(--s1) / 2),
+        #0000 var(--s1),
+        var(--c1) var(--s1),
+        var(--c1) var(--s2),
+        #0000 var(--s2)
+      )
+      var(--s) var(--s),
+    radial-gradient(
+        circle,
+        var(--c1) calc(var(--s1) / 4),
+        #0000 calc(var(--s1) / 4)
+      )
+      var(--s) 0,
+    radial-gradient(
+        circle,
+        var(--c2) calc(var(--s1) / 5),
+        #0000 calc(var(--s1) / 5)
+      )
+      0 var(--s);
+  background-size: calc(var(--s) * 2) calc(var(--s) * 2);
+  background-color: var(--c3);
+  background-repeat: repeat;
+}
+
+.fancy-background-9 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 110px;
+  --c1: hsl(from var(--c) h s calc(l + var(--v)));
+  --c2: var(--c);
+
+  background: linear-gradient(
+    -45deg,
+    #0000 50%,
+    var(--c1) 50%,
+    var(--c1) 60%,
+    #0000 60%
+  );
+  background-size: var(--s) var(--s);
+  background-color: var(--c2);
+}
+
+.fancy-background-10 {
+  --c: var(--bs-tertiary-bg);
+  --v: 3;
+  --s: 100px;
+  --c1: hsl(from var(--c) h s calc(l + var(--v) * 6));
+  --c2: hsl(from var(--c) h s calc(l + var(--v) * 2));
+  --c3: var(--c);
+  --s1: var(--s);
+  --s2: calc(var(--s) / 5);
+
+  background-color: var(--c3);
+  background-image: linear-gradient(var(--c1) 2px, transparent 2px),
+    linear-gradient(90deg, var(--c1) 2px, transparent 2px),
+    linear-gradient(var(--c2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--c2) 1px, transparent 1px);
+  background-size:
+    var(--s1) var(--s1),
+    var(--s1) var(--s1),
+    var(--s2) var(--s2),
+    var(--s2) var(--s2);
+  background-position:
+    -10px -2px,
+    -2px -2px,
+    -1px -1px,
+    -1px -1px;
+}

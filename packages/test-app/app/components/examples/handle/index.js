@@ -1,10 +1,14 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { insertBefore, insertAfter, removeItem } from 'ember-draggable-modifiers/utils/array';
+import {
+  insertBefore,
+  insertAfter,
+  removeItem,
+} from 'ember-draggable-modifiers/utils/array';
 
 export default class ExamplesHandleComponent extends Component {
-  @tracked items = [ 'One', 'Two', 'Three', 'Four', 'Five' ];
+  @tracked items = ['One', 'Two', 'Three', 'Four', 'Five'];
 
   hbsCode = `
     <ul>
@@ -17,9 +21,9 @@ export default class ExamplesHandleComponent extends Component {
     </ul>
   `;
 
-  get jsCode () {
+  get jsCode() {
     return `
-      @tracked items = [ ${this.items.map(item => JSON.stringify(item)).join(', ')} ];
+      @tracked items = [ ${this.items.map((item) => JSON.stringify(item)).join(', ')} ];
 
       @action move ({ source: { data: draggedItem }, target: { data: dropTarget, edge } }) {
         this.items = removeItem(this.items, draggedItem);
@@ -31,9 +35,12 @@ export default class ExamplesHandleComponent extends Component {
         }
       }
     `;
-  };
+  }
 
-  @action move ({ source: { data: draggedItem }, target: { data: dropTarget, edge } }) {
+  @action move({
+    source: { data: draggedItem },
+    target: { data: dropTarget, edge },
+  }) {
     this.items = removeItem(this.items, draggedItem);
 
     if (edge === 'top') {

@@ -1,12 +1,16 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { insertBefore, insertAfter, removeItem } from 'ember-draggable-modifiers/utils/array';
+import {
+  insertBefore,
+  insertAfter,
+  removeItem,
+} from 'ember-draggable-modifiers/utils/array';
 
 class Item {
   @tracked childs = [];
 
-  constructor (name, childs = []) {
+  constructor(name, childs = []) {
     this.name = name;
     this.childs = childs;
   }
@@ -14,7 +18,7 @@ class Item {
 
 const dump = function (node, depth = 0, indent = '  ') {
   if (node.childs.length) {
-    return `new Item('${node.name}', [\n${indent.repeat(depth + 1)}${node.childs.map(child => dump(child, depth + 1, indent)).join(`,\n${indent.repeat(depth + 1)}`)}\n${indent.repeat(depth)}])`;
+    return `new Item('${node.name}', [\n${indent.repeat(depth + 1)}${node.childs.map((child) => dump(child, depth + 1, indent)).join(`,\n${indent.repeat(depth + 1)}`)}\n${indent.repeat(depth)}])`;
   }
   return `new Item('${node.name}')`;
 };
@@ -22,15 +26,10 @@ const dump = function (node, depth = 0, indent = '  ') {
 export default class ExamplesNestedListsComponent extends Component {
   @tracked root = new Item('root', [
     new Item('One'),
-    new Item('Two', [
-      new Item('Six'),
-      new Item('Seven', [
-        new Item('Eight'),
-      ]),
-    ]),
+    new Item('Two', [new Item('Six'), new Item('Seven', [new Item('Eight')])]),
     new Item('Three'),
     new Item('Four'),
-    new Item('Five')
+    new Item('Five'),
   ]);
 
   hbsCode = `
@@ -61,7 +60,7 @@ export default class ExamplesNestedListsComponent extends Component {
     </li>
   `;
 
-  get jsCode () {
+  get jsCode() {
     return `
       class Item {
         @tracked childs = [];
@@ -76,8 +75,8 @@ export default class ExamplesNestedListsComponent extends Component {
         @tracked root = ${dump(this.root, 4)};
 
         @action move ({ source, target }) {
-          const { data: { item: draggedItem, parent: draggedItemParent }, group: fromList } = source;
-          const { data: { item: dropTarget, parent: dropTargetParent }, group: toList, edge, tree } = target;
+          const { data: { item: draggedItem, parent: draggedItemParent } } = source;
+          const { data: { item: dropTarget, parent: dropTargetParent }, edge, tree } = target;
 
           draggedItemParent.childs = removeItem(draggedItemParent.childs, draggedItem);
 
@@ -92,11 +91,20 @@ export default class ExamplesNestedListsComponent extends Component {
     `;
   }
 
-  @action move ({ source, target }) {
-    const { data: { item: draggedItem, parent: draggedItemParent }, group: fromList } = source;
-    const { data: { item: dropTarget, parent: dropTargetParent }, group: toList, edge, tree } = target;
+  @action move({ source, target }) {
+    const {
+      data: { item: draggedItem, parent: draggedItemParent },
+    } = source;
+    const {
+      data: { item: dropTarget, parent: dropTargetParent },
+      edge,
+      tree,
+    } = target;
 
-    draggedItemParent.childs = removeItem(draggedItemParent.childs, draggedItem);
+    draggedItemParent.childs = removeItem(
+      draggedItemParent.childs,
+      draggedItem,
+    );
 
     const parent = tree === 'make-child' ? dropTarget : dropTargetParent;
     if (edge === 'top') {

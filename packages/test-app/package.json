@@ -81,6 +81,7 @@
     "edition": "octane"
   },
   "dependencies": {
+    "@atlaskit/pragmatic-drag-and-drop-unit-testing": "^1.0.0",
     "@ember/render-modifiers": "^2.1.0",
     "common-tags": "^1.8.2",
     "he": "^1.2.0",

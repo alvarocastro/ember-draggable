@@ -1,48 +1,3 @@
-<style type="text/css">
-  .desktop {
-    position: relative;
-    background: #008080;
-    /*width: 600px;*/
-    height: 400px;
-    overflow: hidden;
-  }
-  .desktop-icon {
-    position: absolute;
-    width: 96px;
-  }
-  .desktop-icon img {
-    pointer-events: none;
-    margin: 0 auto 4px;
-    width: 48px;
-    height: 48px;
-    display: block;
-  }
-  .desktop-icon span {
-    display: block;
-    font-size: 14px;
-    text-align: center;
-  }
-
-  .bsod {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: blue;
-    font-family: monospace;
-  }
-  .bsod .message {
-    max-width: 400px;
-  }
-  .bsod .title {
-    text-align: center;
-  }
-  .bsod .title span {
-    background: gray;
-    color: blue;
-    padding: 0 8px;
-  }
-</style>
-
 <Ui::Subsection @title="Windows 98">
   <p>
     This example showcases the separate uses of <code>\{{draggable-item}}</code> and <code>\{{drop-target}}.</code>
@@ -56,20 +11,20 @@
     {{#each this.icons as |icon|}}
       <div
         class="desktop-icon"
-        style="{{icon.position}}"
+        style={{icon.position}}
         {{draggable-item data=icon}}
       >
-        <img src="{{icon.image}}" />
+        <img src="{{icon.image}}" alt="{{icon.name}}" />
         <span>{{icon.name}}</span>
       </div>
     {{/each}}
     <div
       class="desktop-icon"
-      style="{{this.trash.position}}"
+      style={{this.trash.position}}
       {{draggable-item data=this.trash}}
       {{drop-target onDrop=this.delete data=this.trash}}
     >
-      <img src="{{this.trash.image}}" />
+      <img src="{{this.trash.image}}" alt="{{this.trash.name}}" />
       <span>{{this.trash.name}}</span>
     </div>
 

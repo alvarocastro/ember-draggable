@@ -1,3 +1,5 @@
+import { assert } from '@ember/debug';
+
 /**
  * Insert an item to an array in the specified index.
  * @param {Array} arr
@@ -6,6 +8,7 @@
  * @returns {Array} []
  */
 export function insertAt(arr, index, item) {
+  // assert('index is out of bounds', index > 0 && index < arr.length);
   const clone = [...arr];
   clone.splice(index, 0, item);
   return clone;
@@ -31,7 +34,9 @@ export function removeAt(arr, index) {
  * @return {Array} []
  */
 export function insertBefore(arr, targetItem, item) {
-  return insertAt(arr, arr.indexOf(targetItem), item);
+  const index = arr.indexOf(targetItem);
+  assert('Item must exist', index >= 0);
+  return insertAt(arr, index, item);
 }
 
 /**
@@ -42,7 +47,9 @@ export function insertBefore(arr, targetItem, item) {
  * @return {Array} []
  */
 export function insertAfter(arr, targetItem, item) {
-  return insertAt(arr, arr.indexOf(targetItem) + 1, item);
+  const index = arr.indexOf(targetItem);
+  assert('Item must exist', index >= 0);
+  return insertAt(arr, index + 1, item);
 }
 
 /**
@@ -52,5 +59,7 @@ export function insertAfter(arr, targetItem, item) {
  * @return {Array} []
  */
 export function removeItem(arr, item) {
-  return removeAt(arr, arr.indexOf(item));
+  const index = arr.indexOf(item);
+  assert('Item must exist', index >= 0);
+  return removeAt(arr, index);
 }

@@ -1,7 +1,8 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { stripIndent } from 'common-tags'
+import { htmlSafe } from '@ember/template';
+import { stripIndent } from 'common-tags';
 import he from 'he';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/typescript';
@@ -17,24 +18,24 @@ export default class UiCodeComponent extends Component {
   @tracked lang;
   element;
 
-  get languageName () {
-    return ({
+  get languageName() {
+    return {
       js: 'Javascript',
       hbs: 'Handlebars',
       bash: 'Terminal',
-    })[this.lang];
+    }[this.lang];
   }
 
-  @action init (element) {
+  @action onMount(element) {
     this.element = element;
     this.highlightCode();
   }
 
-  @action update () {
+  @action update() {
     this.highlightCode();
   }
 
-  highlightCode () {
+  highlightCode() {
     const code = this.args.code ?? he.decode(this.element.innerHTML);
     let result;
     if (this.args.lang) {
@@ -43,6 +44,6 @@ export default class UiCodeComponent extends Component {
       result = hljs.highlightAuto(code);
     }
     this.lang = result.language;
-    this.highlightedCode = stripIndent(result.value);
+    this.highlightedCode = htmlSafe(stripIndent(result.value));
   }
 }

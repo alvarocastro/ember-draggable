@@ -2,6 +2,30 @@ import { modifier } from 'ember-modifier';
 import { draggable } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 import { CLASS, prepareDataForCallback } from './drop-target.js';
 
+
+
+import { setCustomNativeDragPreview } from '@atlaskit/pragmatic-drag-and-drop/element/set-custom-native-drag-preview';
+
+    // onGenerateDragPreview: ({ nativeSetDragImage }) => {
+    //     setCustomNativeDragPreview({
+    //         render({ container }) {
+    //             // Create our preview element
+    //             const preview = document.createElement('div');
+
+    //             // Populate and style the preview element however you like
+    //             preview.textContent = 'My Preview';
+    //             Object.assign(preview.style, {
+    //                 padding: '20px',
+    //                 backgroundColor: 'lightpink',
+    //             });
+
+    //             // put the "preview" element into the container element
+    //             container.appendChild(preview);
+    //         },
+    //         nativeSetDragImage,
+    //     });
+    // },
+
 /**
  * Modifier to make a DOM element draggable.
  *
@@ -26,6 +50,7 @@ export default modifier(
       isDraggingClass = CLASS.DRAGGING,
       onDragStart = () => {},
       onDragEnd = () => {},
+      onGenerateDragPreview = () => {},
     } = {},
   ) {
     return draggable({

@@ -1,11 +1,15 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { insertBefore, insertAfter, removeItem } from 'ember-draggable-modifiers/utils/array';
+import {
+  insertBefore,
+  insertAfter,
+  removeItem,
+} from 'ember-draggable-modifiers/utils/array';
 
 export default class ExamplesSharedListsComponent extends Component {
-  @tracked itemsTop = [ 'One', 'Two', 'Three', 'Four', 'Five' ];
-  @tracked itemsBottom = [ 'Six', 'Seven', 'Eight', 'Nine', 'Ten' ];
+  @tracked itemsTop = ['One', 'Two', 'Three', 'Four', 'Five'];
+  @tracked itemsBottom = ['Six', 'Seven', 'Eight', 'Nine', 'Ten'];
 
   hbsCode = `
     <ul>
@@ -38,10 +42,10 @@ export default class ExamplesSharedListsComponent extends Component {
     </ul>
   `;
 
-  get jsCode () {
+  get jsCode() {
     return `
-      @tracked itemsTop = [ ${this.itemsTop.map(item => JSON.stringify(item)).join(', ')} ];
-      @tracked itemsBottom = [ ${this.itemsBottom.map(item => JSON.stringify(item)).join(', ')} ];
+      @tracked itemsTop = [ ${this.itemsTop.map((item) => JSON.stringify(item)).join(', ')} ];
+      @tracked itemsBottom = [ ${this.itemsBottom.map((item) => JSON.stringify(item)).join(', ')} ];
 
       @action move ({ source, target }) {
         const { data: draggedItem, group: fromList } = source;
@@ -58,7 +62,7 @@ export default class ExamplesSharedListsComponent extends Component {
     `;
   }
 
-  @action move ({ source, target }) {
+  @action move({ source, target }) {
     const { data: draggedItem, group: fromList } = source;
     const { data: dropTarget, group: toList, edge } = target;
 
