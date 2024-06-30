@@ -1,7 +1,8 @@
 # ember-draggable-modifiers
 
-![NPM Version](https://img.shields.io/npm/v/ember-draggable-modifiers)
-![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/alvarocastro/ember-draggable-modifiers)
+[![NPM Version](https://img.shields.io/npm/v/ember-draggable-modifiers)](https://www.npmjs.com/package/ember-draggable-modifiers)
+[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/alvarocastro/ember-draggable-modifiers)](https://codeclimate.com/github/alvarocastro/ember-draggable-modifiers)
+[![Ember Observer Score](https://emberobserver.com/badges/ember-draggable-modifiers.svg)](https://emberobserver.com/addons/ember-draggable-modifiers)
 
 Drag and drop modifiers for Ember.js internally powered by the Atlassian Design System.
 
