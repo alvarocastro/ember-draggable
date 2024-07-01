@@ -50,7 +50,7 @@
             },
             {
               "type": "fix",
-              "section": "🐛 Bug Fixes"
+              "section": "🐞 Fixes"
             },
             {
               "type": "chore",
@@ -58,7 +58,7 @@
             },
             {
               "type": "docs",
-              "section": "🏠 Internal"
+              "section": "📝 Documentation"
             }
           ]
         }
