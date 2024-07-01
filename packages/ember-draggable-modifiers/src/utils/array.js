@@ -8,7 +8,6 @@ import { assert } from '@ember/debug';
  * @returns {Array} []
  */
 export function insertAt(arr, index, item) {
-  // assert('index is out of bounds', index > 0 && index < arr.length);
   const clone = [...arr];
   clone.splice(index, 0, item);
   return clone;
