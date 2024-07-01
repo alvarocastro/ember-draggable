@@ -46,11 +46,19 @@
           "types": [
             {
               "type": "feat",
-              "section": "Features"
+              "section": "🚀 Enhancements"
             },
             {
               "type": "fix",
-              "section": "Bug Fixes"
+              "section": "🐛 Bug Fixes"
+            },
+            {
+              "type": "chore",
+              "section": "🏠 Internal"
+            },
+            {
+              "type": "docs",
+              "section": "📝 Documentation"
             }
           ]
         }
