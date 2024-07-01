@@ -1,6 +1,6 @@
 {
   "name": "ember-draggable-modifiers",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Drag and drop modifiers for Ember.js",
   "keywords": [
     "ember-addon",
