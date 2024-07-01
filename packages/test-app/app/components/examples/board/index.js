@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import {
+  insertAt,
   insertBefore,
   insertAfter,
   removeItem,
@@ -16,29 +17,28 @@ class Column {
   }
 }
 class Card {
-  constructor(title, text, seed) {
+  constructor(title, text) {
     this.title = title;
     this.text = text;
-    this.seed = seed;
+    this.seed = title;
   }
 }
 
 export default class ExamplesBoardComponent extends Component {
   @tracked columns = [
     new Column('Todo', [
-      new Card('Sup 1', 'Lorem ipsum', 1),
-      new Card('Sup 2', 'Lorem ipsum', 2),
-      new Card('Sup 3', 'Lorem ipsum', 3),
+      new Card('X-Spark', 'Dimensional sync'),
+      new Card('Automaton Prime', 'Salvage derelict ship'),
+      new Card('QuantumPulse', 'Explore lunar caves'),
+      new Card('X-Spark', 'Neutralize rogue AI'),
+      new Card('NovaCircuit', 'Graviton synthesis'),
     ]),
-    new Column('In progress', [
-      new Card('Sup 4', 'Lorem ipsum', 4),
-      new Card('Sup 5', 'Lorem ipsum', 5),
-    ]),
+    new Column('In progress', []),
     new Column('Done', [
-      new Card('Sup 6', 'Lorem ipsum', 6),
-      new Card('Sup 7', 'Lorem ipsum', 7),
-      new Card('Sup 8', 'Lorem ipsum', 8),
-      new Card('Sup 9', 'Lorem ipsum', 9),
+      new Card('Automaton Prime', 'Analyze cosmic dust'),
+      new Card('QuantumPulse', 'Repair starship hull'),
+      new Card('NovaCircuit', 'Temporal stability'),
+      new Card('QuantumPulse', 'Repair warp drive'),
     ]),
   ];
 
@@ -48,7 +48,7 @@ export default class ExamplesBoardComponent extends Component {
   }) {
     this.columns = removeItem(this.columns, draggedItem);
 
-    if (edge === 'top') {
+    if (edge === 'left') {
       this.columns = insertBefore(this.columns, dropTarget, draggedItem);
     } else {
       this.columns = insertAfter(this.columns, dropTarget, draggedItem);
@@ -66,7 +66,9 @@ export default class ExamplesBoardComponent extends Component {
   }) {
     draggedItemParent.cards = removeItem(draggedItemParent.cards, draggedItem);
 
-    if (edge === 'top') {
+    if (!dropTarget) {
+      dropTargetParent.cards = insertAt(dropTargetParent.cards, 0, draggedItem);
+    } else if (edge === 'top') {
       dropTargetParent.cards = insertBefore(
         dropTargetParent.cards,
         dropTarget,

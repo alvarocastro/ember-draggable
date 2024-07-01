@@ -1,4 +1,16 @@
 <Ui::Subsection @title="Board">
+  <p>
+    By mixing different <code>group</code>s you can create this kind of interactions.
+  </p>
+
+  <p>
+    Columns have <code>\{{sortable-item group="columns"}}</code> while each card have <code>\{{sortable-item group="cards"}}</code> so drops aren't mixed in. Also they use different <code>direction</code> values to better match their hitboxes.
+  </p>
+
+  <p>
+    Also empty columns use a <code>\{{drop-target group="cards"}}</code> to only allow drops.
+  </p>
+
   <div class="hstack gap-3 align-items-start overflow-scroll">
     {{#each this.columns as |column|}}
       <div
