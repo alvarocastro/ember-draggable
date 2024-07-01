@@ -12,6 +12,8 @@
     "lint:fix": "pnpm --filter '*' lint:fix",
     "prepare": "pnpm build",
     "release:patch": "release-it patch",
+    "release:minor": "release-it minor",
+    "release:major": "release-it major",
     "start": "concurrently 'npm:start:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
     "start:addon": "pnpm --filter ember-draggable-modifiers start --no-watch.clearScreen",
     "start:test-app": "pnpm --filter test-app start",
